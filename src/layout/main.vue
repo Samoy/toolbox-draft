@@ -1,64 +1,96 @@
-<script lang="ts" setup>
-import { ref } from "vue";
-const collapsed = ref(false);
-</script>
 <template>
-  <a-layout id="components-layout-demo-custom-trigger">
-    <a-layout-sider v-model="collapsed" :trigger="null" collapsible>
+  <a-layout class="site-layout">
+    <a-layout-sider
+      v-model:collapsed="state.collapsed"
+      :trigger="null"
+      collapsible
+    >
       <div class="logo" />
-      <a-menu theme="dark" mode="inline" :default-selected-keys="['1']">
+      <a-menu
+        v-model:selectedKeys="state.selectedKeys"
+        theme="dark"
+        mode="inline"
+      >
         <a-menu-item key="1">
-          <a-icon type="user" />
+          <user-outlined />
           <span>nav 1</span>
         </a-menu-item>
         <a-menu-item key="2">
-          <a-icon type="video-camera" />
+          <video-camera-outlined />
           <span>nav 2</span>
         </a-menu-item>
         <a-menu-item key="3">
-          <a-icon type="upload" />
+          <upload-outlined />
           <span>nav 3</span>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>
     <a-layout>
-      <a-layout-header style="background: #fff; padding: 0">
-        <a-icon
+      <a-layout-header class="layout-header">
+        <menu-unfold-outlined
+          v-if="state.collapsed"
           class="trigger"
-          :type="collapsed ? 'menu-unfold' : 'menu-fold'"
-          @click="() => (collapsed = !collapsed)"
+          @click="() => (state.collapsed = !state.collapsed)"
+        />
+        <menu-fold-outlined
+          v-else
+          class="trigger"
+          @click="() => (state.collapsed = !state.collapsed)"
         />
       </a-layout-header>
-      <a-layout-content
-        :style="{
-          margin: '24px 16px',
-          padding: '24px',
-          background: '#fff',
-          minHeight: '280px',
-        }"
-      >
+      <a-layout-content class="layout-content" :style="{}">
         Content
       </a-layout-content>
     </a-layout>
   </a-layout>
 </template>
-<style lang="scss" scoped>
-#components-layout-demo-custom-trigger {
+<script lang="ts" setup>
+import {
+  UserOutlined,
+  VideoCameraOutlined,
+  UploadOutlined,
+  MenuUnfoldOutlined,
+  MenuFoldOutlined,
+} from '@ant-design/icons-vue'
+import { ref } from 'vue'
+
+const state = ref<INavState>({
+  selectedKeys: ['1'],
+  collapsed: false,
+})
+</script>
+<style lang="scss">
+.site-layout {
   height: 100vh;
-  .trigger {
-    font-size: 18px;
-    line-height: 64px;
-    padding: 0 24px;
-    cursor: pointer;
-    transition: color 0.3s;
-    &:hover {
-      color: #1890ff;
-    }
+  .layout-header {
+    background: #fff;
+    padding: 0;
   }
-  .logo {
-    height: 32px;
-    background: rgba(255, 255, 255, 0.2);
-    margin: 16px;
+  .site-layout-background {
+    background: #fff;
   }
+  .layout-content {
+    margin: 24px 16px;
+    padding: 24px;
+    background: #fff;
+    min-height: 280px;
+  }
+}
+#app .trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+#app .trigger:hover {
+  color: #1890ff;
+}
+
+#app .logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 16px;
 }
 </style>
