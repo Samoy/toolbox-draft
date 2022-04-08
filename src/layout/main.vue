@@ -38,9 +38,7 @@
           @click="() => (state.collapsed = !state.collapsed)"
         />
       </a-layout-header>
-      <a-layout-content class="layout-content" :style="{}">
-        Content
-      </a-layout-content>
+      <a-layout-content class="layout-content">Content</a-layout-content>
     </a-layout>
   </a-layout>
 </template>
