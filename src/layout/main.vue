@@ -50,16 +50,16 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
 } from '@ant-design/icons-vue'
-import { ref, State } from 'vue'
+import { ref } from 'vue'
 import { useStore } from 'vuex'
 
-const state = ref<INavState>({
+const state = ref({
   selectedKeys: ['1'],
   collapsed: false,
 })
 
-const store = useStore<State>()
-console.log('储存', store);
+const store = useStore<IRootState>()
+console.log('储存', store.state.theme);
 </script>
 <style lang="less">
 .site-layout {

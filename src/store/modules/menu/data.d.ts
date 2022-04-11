@@ -6,6 +6,7 @@ declare interface IMenu {
   url?: string
   children?: IMenu[]
 }
+
 declare interface IMenuState {
   list: IMenu[]
 }

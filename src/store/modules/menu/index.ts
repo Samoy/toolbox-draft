@@ -1,4 +1,3 @@
-import { State } from 'vue'
 import { Module } from 'vuex'
 
 /**
@@ -12,7 +11,7 @@ const list: IMenu[] = [
   },
 ]
 
-export const menu: Module<IMenuState, State> = {
+export const menu: Module<IMenuState, IRootState> = {
   state: () => ({
     list,
   }),
