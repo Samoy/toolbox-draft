@@ -3,6 +3,7 @@
   "prettier.singleQuote": true,
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "modifications",
-  "volar.codeLens.pugTools": true,
-  "volar.codeLens.scriptSetupTools": true
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

@@ -50,14 +50,18 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
 } from '@ant-design/icons-vue'
-import { ref } from 'vue'
+import { ref, State } from 'vue'
+import { useStore } from 'vuex'
 
 const state = ref<INavState>({
   selectedKeys: ['1'],
   collapsed: false,
 })
+
+const store = useStore<State>()
+console.log('储存', store);
 </script>
-<style lang="scss">
+<style lang="less">
 .site-layout {
   height: 100vh;
   .layout-header {
