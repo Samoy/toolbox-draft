@@ -6,7 +6,7 @@ import { Module } from 'vuex'
 const list: IMenu[] = [
   {
     id: 'index',
-    name: 'Dashboard',
+    title: 'Dashboard',
     url: '/',
   },
 ]
@@ -14,5 +14,13 @@ const list: IMenu[] = [
 export const menu: Module<IMenuState, IRootState> = {
   state: () => ({
     list,
+    selectedKeys: [],
+    openKeys: ['index'],
+    collapsed: false,
   }),
+  mutations: {
+    toggleCollapsed(state) {
+      state.collapsed = !state.collapsed
+    },
+  },
 }

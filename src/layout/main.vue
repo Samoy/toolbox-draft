@@ -5,24 +5,16 @@
       :trigger="null"
       collapsible
     >
-      <div class="logo" />
-      <a-menu
-        v-model:selectedKeys="state.selectedKeys"
-        theme="dark"
-        mode="inline"
-      >
-        <a-menu-item key="1">
-          <user-outlined />
-          <span>nav 1</span>
+      <div class="logo"></div>
+      <a-menu theme="dark" mode="inline" v-for="item in state.list">
+        <a-menu-item v-if="!item.children" :key="item.id">
+          <span>{{ item.title }}</span>
         </a-menu-item>
-        <a-menu-item key="2">
-          <video-camera-outlined />
-          <span>nav 2</span>
-        </a-menu-item>
-        <a-menu-item key="3">
-          <upload-outlined />
-          <span>nav 3</span>
-        </a-menu-item>
+        <a-sub-menu :title="item.title" v-else v-for="menu in item.children">
+          <a-menu-item :key="menu.id">
+            <span>{{ menu.title }}</span>
+          </a-menu-item>
+        </a-sub-menu>
       </a-menu>
     </a-layout-sider>
     <a-layout>
@@ -30,36 +22,25 @@
         <menu-unfold-outlined
           v-if="state.collapsed"
           class="trigger"
-          @click="() => (state.collapsed = !state.collapsed)"
+          @click="toggleCollapsed"
         />
-        <menu-fold-outlined
-          v-else
-          class="trigger"
-          @click="() => (state.collapsed = !state.collapsed)"
-        />
+        <menu-fold-outlined v-else class="trigger" @click="toggleCollapsed" />
       </a-layout-header>
       <a-layout-content class="layout-content">Content</a-layout-content>
     </a-layout>
   </a-layout>
 </template>
 <script lang="ts" setup>
-import {
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-} from '@ant-design/icons-vue'
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue'
 import { ref } from 'vue'
 import { useStore } from 'vuex'
 
-const state = ref({
-  selectedKeys: ['1'],
-  collapsed: false,
-})
-
 const store = useStore<IRootState>()
-console.log('储存', store.state.theme);
+const state = ref<IMenuState>(store.state.menu)
+
+function toggleCollapsed() {
+  store.commit('toggleCollapsed')
+}
 </script>
 <style lang="less">
 .site-layout {
