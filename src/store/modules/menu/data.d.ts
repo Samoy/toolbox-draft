@@ -1,7 +1,8 @@
 declare interface IMenu {
-  id: string
+  key: string
   title: string
   url?: string
+  icon?: string
   children?: IMenu[]
 }
 
@@ -11,10 +12,6 @@ declare interface IMenuState {
    * 当前选中菜单
    */
   selectedKeys?: string[]
-  /**
-   * 当前打开菜单
-   */
-  openKeys?: string[]
   /**
    * 是否折叠菜单
    */

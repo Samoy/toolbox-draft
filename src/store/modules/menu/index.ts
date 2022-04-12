@@ -1,12 +1,13 @@
 import { Module } from 'vuex'
+import { SELECTED_MENU, TOGGLE_COLLAPSED } from './types'
 
 /**
  * 菜单列表
  */
 const list: IMenu[] = [
   {
-    id: 'index',
-    title: 'Dashboard',
+    key: 'index',
+    title: '主页',
     url: '/',
   },
 ]
@@ -14,13 +15,15 @@ const list: IMenu[] = [
 export const menu: Module<IMenuState, IRootState> = {
   state: () => ({
     list,
-    selectedKeys: [],
-    openKeys: ['index'],
+    selectedKeys: ['index'],
     collapsed: false,
   }),
   mutations: {
-    toggleCollapsed(state) {
+    [TOGGLE_COLLAPSED](state) {
       state.collapsed = !state.collapsed
+    },
+    [SELECTED_MENU](state, key: string) {
+      state.selectedKeys = [key]
     },
   },
 }

@@ -6,12 +6,18 @@
       collapsible
     >
       <div class="logo"></div>
-      <a-menu theme="dark" mode="inline" v-for="item in state.list">
-        <a-menu-item v-if="!item.children" :key="item.id">
+      <a-menu
+        :selectedKeys="state.selectedKeys"
+        @select="selectedMenu"
+        theme="dark"
+        mode="inline"
+        v-for="item in state.list"
+      >
+        <a-menu-item v-if="!item.children" :key="item.key">
           <span>{{ item.title }}</span>
         </a-menu-item>
         <a-sub-menu :title="item.title" v-else v-for="menu in item.children">
-          <a-menu-item :key="menu.id">
+          <a-menu-item :key="menu.key">
             <span>{{ menu.title }}</span>
           </a-menu-item>
         </a-sub-menu>
@@ -34,12 +40,18 @@
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue'
 import { ref } from 'vue'
 import { useStore } from 'vuex'
+import { SelectInfo } from 'ant-design-vue/lib/menu/src/interface'
+import { SELECTED_MENU, TOGGLE_COLLAPSED } from '../store/modules/menu/types'
 
 const store = useStore<IRootState>()
 const state = ref<IMenuState>(store.state.menu)
 
 function toggleCollapsed() {
-  store.commit('toggleCollapsed')
+  store.commit(TOGGLE_COLLAPSED)
+}
+
+function selectedMenu({ key }: SelectInfo) {
+  store.commit(SELECTED_MENU, key as string)
 }
 </script>
 <style lang="less">
