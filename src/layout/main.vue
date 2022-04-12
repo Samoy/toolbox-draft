@@ -5,7 +5,9 @@
       :trigger="null"
       collapsible
     >
-      <div class="logo"></div>
+      <div class="logo">
+        <span v-show="!state.collapsed">协力实用工具</span>
+      </div>
       <a-menu
         :selectedKeys="state.selectedKeys"
         @select="selectedMenu"
@@ -85,7 +87,7 @@ function selectedMenu({ key }: SelectInfo) {
 
 #app .logo {
   height: 32px;
-  background: rgba(255, 255, 255, 0.3);
+  background: url('../assets/logo.svg') no-repeat;
   margin: 16px;
 }
 </style>
