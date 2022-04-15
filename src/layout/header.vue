@@ -1,33 +1,42 @@
 <template>
-  <a-layout-header class="layout-header">
+  <a-layout-header :theme="theme.type" class="layout-header">
     <menu-unfold-outlined
-      v-if="state.collapsed"
+      v-if="menu.collapsed"
       class="trigger"
       @click="toggleCollapsed"
     />
     <menu-fold-outlined v-else class="trigger" @click="toggleCollapsed" />
+    <a-switch @change="myToggleTheme" :checked="theme.type == 'dark'"></a-switch
+    >暗黑模式
   </a-layout-header>
 </template>
 
 <script setup lang="ts">
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue'
-import { ref } from 'vue'
 import { useStore } from 'vuex'
 import { TOGGLE_COLLAPSED } from '../store/modules/menu/types'
-import { toggleTheme } from "@zougt/vite-plugin-theme-preprocessor/dist/browser-utils";
+import { toggleTheme } from '@zougt/vite-plugin-theme-preprocessor/dist/browser-utils'
+import { TOGGLE_THEME } from '../store/modules/theme/types'
 
 const store = useStore<IRootState>()
-const state = ref<IMenuState>(store.state.menu)
+const { menu, theme } = store.state
 
 function toggleCollapsed() {
   store.commit(TOGGLE_COLLAPSED)
 }
 
+/**
+ * 切换主题
+ */
+function myToggleTheme() {
+  const themeType = theme.type == 'dark' ? 'light' : 'dark'
+  toggleTheme({ scopeName: `theme-${themeType}` })
+  store.commit(TOGGLE_THEME, themeType)
+}
 </script>
 
 <style lang="less" scoped>
 .layout-header {
-  background: #fff;
   padding: 0;
   .trigger {
     font-size: 18px;

@@ -14,7 +14,7 @@ export default defineConfig({
   plugins: [
     vue(),
     Components({
-      resolvers: [AntDesignVueResolver()],
+      resolvers: [AntDesignVueResolver({importStyle: "less"})],
     }),
     // 创建动态主题切换
     themePreprocessorPlugin({
@@ -35,7 +35,12 @@ export default defineConfig({
   ],
   css: {
     preprocessorOptions: {
-      javascriptEnabled: true,
+      less: {
+        javascriptEnabled: true,
+      },
     },
+  },
+  optimizeDeps: {
+    exclude: ["@zougt/vite-plugin-theme-preprocessor/dist/browser-utils"],
   },
 })

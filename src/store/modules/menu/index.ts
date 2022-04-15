@@ -5,7 +5,7 @@ import { HomeOutlined } from '@ant-design/icons-vue'
 /**
  * 菜单列表
  */
-const list: IMenu[] = [
+const defaultList: IMenu[] = [
   {
     key: 'index',
     title: '主页',
@@ -16,7 +16,7 @@ const list: IMenu[] = [
 
 export const menu: Module<IMenuState, IRootState> = {
   state: () => ({
-    list,
+    list: defaultList,
     selectedKeys: ['index'],
     collapsed: false,
   }),

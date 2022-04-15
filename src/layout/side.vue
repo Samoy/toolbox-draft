@@ -12,7 +12,7 @@
     <a-menu
       :selectedKeys="state.selectedKeys"
       @select="selectedMenu"
-      theme="dark"
+      :theme="theme.type"
       mode="inline"
       v-for="item in state.list"
     >
@@ -37,6 +37,7 @@ import { SELECTED_MENU } from '../store/modules/menu/types'
 
 const store = useStore<IRootState>()
 const state = ref<IMenuState>(store.state.menu)
+const theme = ref<IThemeState>(store.state.theme)
 
 function selectedMenu({ key }: SelectInfo) {
   store.commit(SELECTED_MENU, key as string)

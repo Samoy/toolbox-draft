@@ -3,5 +3,5 @@
  */
 declare type IRootState = {
   menu: IMenuState
-  theme: string
+  theme: IThemeState
 }
