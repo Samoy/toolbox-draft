@@ -14,6 +14,7 @@ import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue'
 import { ref } from 'vue'
 import { useStore } from 'vuex'
 import { TOGGLE_COLLAPSED } from '../store/modules/menu/types'
+import { toggleTheme } from "@zougt/vite-plugin-theme-preprocessor/dist/browser-utils";
 
 const store = useStore<IRootState>()
 const state = ref<IMenuState>(store.state.menu)
@@ -21,6 +22,7 @@ const state = ref<IMenuState>(store.state.menu)
 function toggleCollapsed() {
   store.commit(TOGGLE_COLLAPSED)
 }
+
 </script>
 
 <style lang="less" scoped>
