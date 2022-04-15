@@ -1,0 +1,57 @@
+<template>
+  <a-layout-sider
+    v-model:collapsed="state.collapsed"
+    :trigger="null"
+    collapsible
+  >
+    <div class="logo">
+      <span class="name" v-show="!state.collapsed">协力开发工具平台</span>
+    </div>
+    <a-menu
+      :selectedKeys="state.selectedKeys"
+      @select="selectedMenu"
+      theme="dark"
+      mode="inline"
+      v-for="item in state.list"
+    >
+      <a-menu-item v-if="!item.children" :key="item.key">
+        <span>{{ item.title }}</span>
+      </a-menu-item>
+      <a-sub-menu :title="item.title" v-else v-for="menu in item.children">
+        <a-menu-item :key="menu.key">
+          <span>{{ menu.title }}</span>
+        </a-menu-item>
+      </a-sub-menu>
+    </a-menu>
+  </a-layout-sider>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useStore } from 'vuex'
+import { SelectInfo } from 'ant-design-vue/lib/menu/src/interface'
+import { SELECTED_MENU } from '../store/modules/menu/types'
+
+const store = useStore<IRootState>()
+const state = ref<IMenuState>(store.state.menu)
+
+function selectedMenu({ key }: SelectInfo) {
+  store.commit(SELECTED_MENU, key as string)
+}
+</script>
+
+<style lang="less" scoped>
+.logo {
+  height: 32px;
+  line-height: 32px;
+  background: url('../assets/logo.svg') no-repeat;
+  margin: 16px 20px;
+  color: #fff;
+  padding-left: 40px;
+  background-position-y: center;
+  .name{
+      min-width: 0;
+      overflow: hidden;
+  }
+}
+</style>
