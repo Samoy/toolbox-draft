@@ -54,7 +54,7 @@ function selectedMenu({ key }: SelectInfo) {
   background-position-y: center;
 }
 .fade-enter-active {
-  transition: opacity 0.8s ease;
+  transition: opacity .6s ease-in;
 }
 .fade-enter-from {
   opacity: 0;
