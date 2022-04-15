@@ -1,5 +1,6 @@
 import { Module } from 'vuex'
 import { SELECTED_MENU, TOGGLE_COLLAPSED } from './types'
+import { HomeOutlined } from '@ant-design/icons-vue'
 
 /**
  * 菜单列表
@@ -9,6 +10,7 @@ const list: IMenu[] = [
     key: 'index',
     title: '主页',
     url: '/',
+    icon: HomeOutlined,
   },
 ]
 

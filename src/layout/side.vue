@@ -5,7 +5,9 @@
     collapsible
   >
     <div class="logo">
-      <span class="name" v-show="!state.collapsed">协力开发工具平台</span>
+      <transition name="fade">
+        <span v-show="!state.collapsed">协力开发工具平台</span>
+      </transition>
     </div>
     <a-menu
       :selectedKeys="state.selectedKeys"
@@ -15,6 +17,7 @@
       v-for="item in state.list"
     >
       <a-menu-item v-if="!item.children" :key="item.key">
+        <component :is="item.icon"></component>
         <span>{{ item.title }}</span>
       </a-menu-item>
       <a-sub-menu :title="item.title" v-else v-for="menu in item.children">
@@ -49,9 +52,11 @@ function selectedMenu({ key }: SelectInfo) {
   color: #fff;
   padding-left: 40px;
   background-position-y: center;
-  .name{
-      min-width: 0;
-      overflow: hidden;
-  }
+}
+.fade-enter-active {
+  transition: opacity 0.8s ease;
+}
+.fade-enter-from {
+  opacity: 0;
 }
 </style>
