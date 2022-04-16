@@ -12,7 +12,6 @@
     <a-menu
       :selectedKeys="state.selectedKeys"
       @select="selectedMenu"
-      :theme="theme.type"
       mode="inline"
       v-for="item in state.list"
     >
@@ -49,8 +48,7 @@ function selectedMenu({ key }: SelectInfo) {
   height: 32px;
   line-height: 32px;
   background: url('../assets/logo.svg') no-repeat;
-  margin: 16px 20px;
-  color: #fff;
+  margin: 14px 20px;
   padding-left: 40px;
   background-position-y: center;
 }

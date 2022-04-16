@@ -6,8 +6,20 @@
       @click="toggleCollapsed"
     />
     <menu-fold-outlined v-else class="trigger" @click="toggleCollapsed" />
-    <a-switch @change="myToggleTheme" :checked="theme.type == 'dark'"></a-switch
-    >暗黑模式
+    <span>
+      <a-switch
+        title="暗黑模式"
+        @change="myToggleTheme"
+        :checked="theme.type == 'dark'"
+      >
+        <template #checkedChildren>
+          <icon-font type="icon-moon"></icon-font>
+        </template>
+        <template #unCheckedChildren>
+          <icon-font type="icon-moon"></icon-font>
+        </template>
+      </a-switch>
+    </span>
   </a-layout-header>
 </template>
 
@@ -17,6 +29,7 @@ import { useStore } from 'vuex'
 import { TOGGLE_COLLAPSED } from '../store/modules/menu/types'
 import { toggleTheme } from '@zougt/vite-plugin-theme-preprocessor/dist/browser-utils'
 import { TOGGLE_THEME } from '../store/modules/theme/types'
+import { IconFont } from '../components/icon'
 
 const store = useStore<IRootState>()
 const { menu, theme } = store.state
@@ -37,11 +50,13 @@ function myToggleTheme() {
 
 <style lang="less" scoped>
 .layout-header {
-  padding: 0;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   .trigger {
     font-size: 18px;
     line-height: 64px;
-    padding: 0 24px;
     cursor: pointer;
     transition: color 0.3s;
     &:hover {
