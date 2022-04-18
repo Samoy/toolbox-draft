@@ -50,6 +50,8 @@ function selectedMenu({ key }: SelectInfo) {
   background: url('../assets/logo.svg') no-repeat;
   margin: 14px 20px;
   padding-left: 40px;
+  font-weight: bold;
+  font-size: 15px;
   background-position-y: center;
 }
 .fade-enter-active {

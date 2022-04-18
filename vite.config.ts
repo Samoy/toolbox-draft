@@ -14,7 +14,7 @@ export default defineConfig({
   plugins: [
     vue(),
     Components({
-      resolvers: [AntDesignVueResolver({importStyle: "less"})],
+      resolvers: [AntDesignVueResolver({ importStyle: 'less' })],
     }),
     // 创建动态主题切换
     themePreprocessorPlugin({
@@ -22,11 +22,11 @@ export default defineConfig({
         multipleScopeVars: [
           {
             scopeName: 'theme-light',
-            path: path.resolve('src/theme/light.less'),
+            path: path.resolve('src/style/light.less'),
           },
           {
             scopeName: 'theme-dark',
-            path: path.resolve('src/theme/dark.less'),
+            path: path.resolve('src/style/dark.less'),
           },
         ],
       },
@@ -37,10 +37,18 @@ export default defineConfig({
     preprocessorOptions: {
       less: {
         javascriptEnabled: true,
+        additionalData: '@import "./src/style/index.less";',
       },
     },
   },
   optimizeDeps: {
-    exclude: ["@zougt/vite-plugin-theme-preprocessor/dist/browser-utils"],
+    exclude: ['@zougt/vite-plugin-theme-preprocessor/dist/browser-utils'],
+  },
+  resolve: {
+    alias: {
+      '@': './src',
+      '@assets': './src/assets',
+      '@components': './src/components',
+    },
   },
 })
