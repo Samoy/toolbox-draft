@@ -8,12 +8,12 @@
     <menu-fold-outlined v-else class="trigger" @click="toggleCollapsed" />
     <span>
       <a-switch
-        title="暗黑模式"
+        title="主题切换"
         @change="myToggleTheme"
         :checked="theme.type == 'dark'"
       >
         <template #checkedChildren>
-          <icon-font type="icon-moon"></icon-font>
+          <icon-font type="icon-brightness"></icon-font>
         </template>
         <template #unCheckedChildren>
           <icon-font type="icon-moon"></icon-font>
@@ -34,6 +34,9 @@ import { IconFont } from '../components/icon'
 const store = useStore<IRootState>()
 const { menu, theme } = store.state
 
+/**
+ * 切换折叠
+ */
 function toggleCollapsed() {
   store.commit(TOGGLE_COLLAPSED)
 }

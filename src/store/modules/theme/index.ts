@@ -12,4 +12,7 @@ export const theme: Module<IThemeState, IRootState> = {
       state.type = payload
     },
   },
+  getters: {
+    isDark: ({ type }) => type == 'dark',
+  },
 }

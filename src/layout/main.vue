@@ -1,6 +1,6 @@
 <template>
   <a-layout class="site-layout">
-    <Side></Side>
+    <Sider></Sider>
     <a-layout>
       <Header></Header>
       <a-layout-content class="layout-content">Content</a-layout-content>
@@ -9,7 +9,7 @@
   </a-layout>
 </template>
 <script lang="ts" setup>
-import Side from './side.vue'
+import Sider from './sider.vue'
 import Header from './header.vue'
 import Footer from './footer.vue'
 </script>

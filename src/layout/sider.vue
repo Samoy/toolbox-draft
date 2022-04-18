@@ -1,19 +1,19 @@
 <template>
   <a-layout-sider
-    v-model:collapsed="state.collapsed"
+    v-model:collapsed="menu.collapsed"
     :trigger="null"
     collapsible
   >
     <div class="logo">
       <transition name="fade">
-        <span v-show="!state.collapsed">协力开发工具平台</span>
+        <span v-show="!menu.collapsed">协力开发工具平台</span>
       </transition>
     </div>
     <a-menu
-      :selectedKeys="state.selectedKeys"
+      :selectedKeys="menu.selectedKeys"
       @select="selectedMenu"
       mode="inline"
-      v-for="item in state.list"
+      v-for="item in menu.list"
     >
       <a-menu-item v-if="!item.children" :key="item.key">
         <component :is="item.icon"></component>
@@ -29,14 +29,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { useStore } from 'vuex'
 import { SelectInfo } from 'ant-design-vue/lib/menu/src/interface'
 import { SELECTED_MENU } from '../store/modules/menu/types'
 
 const store = useStore<IRootState>()
-const state = ref<IMenuState>(store.state.menu)
-const theme = ref<IThemeState>(store.state.theme)
+const { menu } = store.state
 
 function selectedMenu({ key }: SelectInfo) {
   store.commit(SELECTED_MENU, key as string)
@@ -55,7 +53,7 @@ function selectedMenu({ key }: SelectInfo) {
   background-position-y: center;
 }
 .fade-enter-active {
-  transition: opacity .6s ease-in;
+  transition: opacity 0.8s ease-in;
 }
 .fade-enter-from {
   opacity: 0;
