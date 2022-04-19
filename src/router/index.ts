@@ -7,18 +7,22 @@ import { menuList } from '../store/modules/menu'
  */
 const genRoutes = (menus: IMenu[]): RouteRecordRaw[] => {
   let routes: RouteRecordRaw[] = []
-  menus.forEach((menu) => {
-    if (menu.children) {
-      genRoutes(menu.children)
-    }
-    if (menu.url !== undefined && menu.component !== undefined) {
-      routes.push({
-        name: menu.title,
-        path: menu.url,
-        component: menu.component,
-      })
-    }
-  })
+  function generate(menuList: IMenu[]) {
+    menuList.forEach((menu) => {
+      if (menu.children) {
+        generate(menu.children)
+      }
+      if (menu.url !== undefined && menu.component !== undefined) {
+        routes.push({
+          name: menu.title,
+          path: menu.url,
+          component: menu.component,
+        })
+      }
+    })
+  }
+  generate(menus)
+
   return routes
 }
 

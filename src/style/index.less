@@ -3,11 +3,20 @@
 
 // 以下为自定义样式
 // 默认主题
-
+.theme-light {
+  .ant-menu-inline {
+    .ant-menu-sub.ant-menu-inline {
+      background: none;
+    }
+  }
+}
 // 暗黑主题
 .theme-dark {
   .ant-menu-inline,
   .ant-menu-vertical {
     border-right: none;
+  }
+  .ant-menu-sub.ant-menu-inline {
+    background: none;
   }
 }

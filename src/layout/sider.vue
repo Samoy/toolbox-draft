@@ -16,12 +16,16 @@
       v-for="item in menu.list"
     >
       <a-menu-item v-if="!item.children" :key="item.key">
-        <component :is="item.icon"></component>
-        <span>{{ item.title }}</span>
+        <router-link :to="item.url">
+          <component :is="item.icon"></component>
+          <span>{{ item.title }}</span>
+        </router-link>
       </a-menu-item>
       <a-sub-menu :title="item.title" v-else v-for="menu in item.children">
         <a-menu-item :key="menu.key">
-          <span>{{ menu.title }}</span>
+          <router-link :to="menu.url">
+            <span>{{ menu.title }}</span>
+          </router-link>
         </a-menu-item>
       </a-sub-menu>
     </a-menu>

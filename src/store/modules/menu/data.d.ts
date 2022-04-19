@@ -2,7 +2,9 @@ declare interface IMenu {
   key: string
   title: string
   url?: string
-  icon?: import('vue').FunctionalComponent
+  icon?: import('vue').FunctionalComponent<
+    import('@ant-design/icons-vue/lib/components/AntdIcon').AntdIconProps
+  >
   component?: import('vue').Component
   children?: IMenu[]
 }
