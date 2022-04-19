@@ -3,7 +3,9 @@
     <Sider></Sider>
     <a-layout>
       <Header></Header>
-      <a-layout-content class="layout-content">Content</a-layout-content>
+      <a-layout-content class="layout-content">
+        <router-view></router-view>
+      </a-layout-content>
       <Footer></Footer>
     </a-layout>
   </a-layout>
@@ -17,9 +19,11 @@ import Footer from './footer.vue'
 .site-layout {
   height: 100vh;
   .layout-content {
-    margin: 24px 16px;
-    padding: 24px;
+    margin: 16px;
+    flex: 1;
     min-height: 280px;
+    display: flex;
+    background: @component-background;
   }
 }
 </style>

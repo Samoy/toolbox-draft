@@ -3,6 +3,7 @@ declare interface IMenu {
   title: string
   url?: string
   icon?: import('vue').FunctionalComponent
+  component?: import('vue').Component
   children?: IMenu[]
 }
 
