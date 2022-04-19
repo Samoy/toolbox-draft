@@ -3,9 +3,8 @@ import { RouteRecordRaw } from 'vue-router'
 import { menuList } from '../store/modules/menu'
 
 /**
- * 配置路由列表
+ * 生成路由列表
  */
-
 const genRoutes = (menus: IMenu[]): RouteRecordRaw[] => {
   let routes: RouteRecordRaw[] = []
   menus.forEach((menu) => {
